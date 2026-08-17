@@ -13,15 +13,14 @@ export default function Contact() {
 
         <Reveal delay={80}>
           <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            Vamos conversar sobre backend, cloud e IA generativa?
+            Bora construir algo juntos?
           </h2>
         </Reveal>
 
         <Reveal delay={140}>
           <p className="mt-5 max-w-xl leading-relaxed text-muted">
-            Aberto a posições de Desenvolvedor(a) Júnior e estágio em
-            Backend, Cloud e IA Generativa. Me chama por aqui — respondo
-            rápido.
+            Estou em busca de oportunidades como Dev Júnior em Backend,
+            Cloud e IA Generativa.
           </p>
         </Reveal>
 
