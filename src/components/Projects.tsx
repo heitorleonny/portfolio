@@ -1,132 +1,131 @@
 "use client";
-
 import { useState } from "react";
-import { ExternalLink } from "lucide-react";
-import SectionHeading from "./SectionHeading";
-import Reveal from "./Reveal";
-import { projects, type Project } from "@/lib/data";
-import { GithubIcon } from "./icons";
-
+import {
+  ArrowUpRight,
+  ArrowRight,
+  Braces,
+  AudioLines,
+  Bot,
+  Network,
+  Mail,
+  CalendarDays,
+  Globe,
+  Layers,
+} from "lucide-react";
+import { projects } from "@/lib/data";
 const tabs = [
-  { id: "pessoal" as const, label: "Projetos Pessoais" },
-  { id: "nuageit" as const, label: "NuageIT" },
-  { id: "seedabit" as const, label: "Seed a Bit" },
+  { id: "all", label: "Todos" },
+  { id: "pessoal", label: "Projetos pessoais" },
+  { id: "nuageit", label: "NuageIT" },
+  { id: "seedabit", label: "Seed a Bit" },
 ];
-
+const artwork = [
+  Network,
+  Mail,
+  CalendarDays,
+  Braces,
+  Bot,
+  Layers,
+  Network,
+  Braces,
+  AudioLines,
+  Globe,
+];
 export default function Projects() {
-  const [active, setActive] = useState<Project["category"]>("pessoal");
-  const list = projects.filter((p) => p.category === active);
-
-  return (
-    <section id="projetos" className="border-b border-line py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeading
-          index="02"
-          title="Projetos"
-          description="Um projeto autoral de inteligência de dados e cases técnicos entregues na NuageIT e na Seed a Bit."
-        />
-
-        <Reveal className="mb-10 inline-flex gap-1 rounded-full border border-line bg-bg-card p-1">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActive(tab.id)}
-              className={`rounded-full px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
-                active === tab.id
-                  ? "bg-accent text-[#04141c]"
-                  : "text-muted hover:text-fg"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </Reveal>
-
-        <div className="grid gap-5 sm:grid-cols-2">
-          {list.map((project, i) => (
-            <Reveal key={project.id} delay={i * 70}>
-              <ProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
+  const [active, setActive] = useState("all");
+  const [expanded, setExpanded] = useState(false);
+  const filtered = projects.filter(
+    (p) => active === "all" || p.category === active,
   );
-}
-
-function ProjectCard({ project }: { project: Project }) {
+  const visible = expanded ? filtered : filtered.slice(0, 4);
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-line bg-bg-card p-6 transition-colors hover:border-accent/50">
-      <div className="flex items-center justify-between gap-2">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-accent">
-          {project.tag}
-        </span>
-        {project.featured && (
-          <span className="rounded-full border border-accent/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">
-            Featured
-          </span>
-        )}
+    <section id="projetos" className="section container">
+      <div className="section-top">
+        <div>
+          <p className="eyebrow">01 / TRABALHOS SELECIONADOS</p>
+          <h2>
+            Ideias que viraram
+            <br />
+            soluções reais<span>.</span>
+          </h2>
+        </div>
+        <p className="section-intro">
+          Uma seleção do que construo entre código, cloud e inteligência
+          artificial.
+        </p>
       </div>
-
-      <h3 className="mt-3 text-lg font-medium text-fg">{project.title}</h3>
-      {project.org && (
-        <p className="font-mono text-xs text-muted-2">{project.org}</p>
-      )}
-
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-        {project.description}
-      </p>
-
-      {project.bullets && (
-        <ul className="mt-3 space-y-1.5">
-          {project.bullets.map((b) => (
-            <li
-              key={b}
-              className="flex gap-2 text-sm text-muted before:mt-2 before:h-1 before:w-1 before:shrink-0 before:rounded-full before:bg-accent"
-            >
-              {b}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.stack.map((tech) => (
-          <span
-            key={tech}
-            className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted"
+      <div className="project-tabs" role="group" aria-label="Filtrar projetos">
+        {tabs.map((tab) => (
+          <button
+            aria-pressed={active === tab.id}
+            className={active === tab.id ? "active" : ""}
+            key={tab.id}
+            onClick={() => {
+              setActive(tab.id);
+              setExpanded(false);
+            }}
           >
-            {tech}
-          </span>
+            {tab.label}
+            {tab.id === "all" && (
+              <span>{projects.length.toString().padStart(2, "0")}</span>
+            )}
+          </button>
         ))}
       </div>
-
-      {(project.link || project.liveUrl) && (
-        <div className="mt-5 flex items-center gap-4 border-t border-line pt-4">
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1.5 font-mono text-xs text-muted transition-colors hover:text-accent"
-            >
-              <GithubIcon size={14} />
-              Código
-            </a>
-          )}
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1.5 font-mono text-xs text-muted transition-colors hover:text-accent"
-            >
-              <ExternalLink size={14} />
-              Ver online
-            </a>
-          )}
-        </div>
+      <div className="project-grid">
+        {visible.map((project) => {
+          const index = projects.indexOf(project);
+          const Icon = artwork[index];
+          return (
+            <article className="project-card" key={project.id}>
+              <div className={`project-art art-${index % 4}`}>
+                <div className="art-grid" />
+                <span className="art-caption">
+                  {project.org || "PROJETO PESSOAL"}
+                </span>
+                <Icon className="art-icon" size={90} strokeWidth={1} />
+                <span className="art-name">{project.title}</span>
+                <span className="art-index">
+                  /{String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div className="project-body">
+                <p className="eyebrow">{project.tag}</p>
+                <div className="project-title">
+                  <h3>{project.title}</h3>
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Ver código de ${project.title}`}
+                    >
+                      <ArrowUpRight size={23} />
+                    </a>
+                  )}
+                </div>
+                <p>{project.description}</p>
+                <div className="tags">
+                  {project.stack.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      {filtered.length > 4 && (
+        <button
+          className="text-button projects-more"
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded
+            ? "Mostrar menos projetos"
+            : `Explorar os ${filtered.length} projetos`}{" "}
+          <ArrowRight size={17} />
+        </button>
       )}
-    </div>
+    </section>
   );
 }

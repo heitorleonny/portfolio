@@ -215,8 +215,7 @@ export const projects: Project[] = [
     org: "NuageIT",
     category: "nuageit",
     tag: "IA & VOZ",
-    description:
-      "Aplicação em nuvem para classificar a fala de crianças.",
+    description: "Aplicação em nuvem para classificar a fala de crianças.",
     stack: ["Python", "Amazon Bedrock", "Amazon Transcribe", "AWS"],
   },
   {
@@ -269,7 +268,11 @@ export const skillGroups: SkillGroup[] = [
     description:
       "Construção de APIs REST e infraestrutura em nuvem para aplicações escaláveis em produção.",
     skills: [
-      { name: "AWS", note: "Lambda, S3, EC2, SQS, SAM, CloudWatch", icon: "cloud" },
+      {
+        name: "AWS",
+        note: "Lambda, S3, EC2, SQS, SAM, CloudWatch",
+        icon: "cloud",
+      },
       { name: "TypeScript", note: "APIs modulares com NestJS", icon: "code" },
       { name: "NestJS", note: "Arquitetura em camadas", icon: "layers" },
       { name: "Python", note: "APIs com FastAPI e Django", icon: "terminal" },
@@ -287,9 +290,21 @@ export const skillGroups: SkillGroup[] = [
       "Construção de assistentes e agentes de IA generativa aplicados a processos reais de negócio.",
     skills: [
       { name: "Amazon Bedrock", note: "Agentes & assistentes", icon: "bot" },
-      { name: "Prompt Engineering", note: "Guardrails & contexto", icon: "wand" },
-      { name: "RAG", note: "Bases de conhecimento vetorizadas", icon: "search" },
-      { name: "Amazon DynamoDB", note: "Persistência para agentes", icon: "dynamodb" },
+      {
+        name: "Prompt Engineering",
+        note: "Guardrails & contexto",
+        icon: "wand",
+      },
+      {
+        name: "RAG",
+        note: "Bases de conhecimento vetorizadas",
+        icon: "search",
+      },
+      {
+        name: "Amazon DynamoDB",
+        note: "Persistência para agentes",
+        icon: "dynamodb",
+      },
       { name: "Streamlit", note: "Prototipagem de dados", icon: "chart" },
     ],
   },
@@ -307,7 +322,11 @@ export const skillGroups: SkillGroup[] = [
       { name: "Product Owner", note: "Gestão de entregas", icon: "clipboard" },
       { name: "Scrum", note: "Rituais ágeis", icon: "scrum" },
       { name: "Liderança", note: "Direção da área de Projetos", icon: "users" },
-      { name: "Git / GitHub", note: "Versionamento & code review", icon: "git" },
+      {
+        name: "Git / GitHub",
+        note: "Versionamento & code review",
+        icon: "git",
+      },
     ],
   },
 ];
@@ -317,3 +336,12 @@ export const certification = {
   issuer: "Amazon Web Services",
   date: "Fevereiro de 2026",
 };
+
+export const certifications: {
+  title: string;
+  issuer: string;
+  date?: string;
+}[] = [
+  certification,
+  { title: "AWS Certified AI Practitioner", issuer: "Amazon Web Services" },
+];

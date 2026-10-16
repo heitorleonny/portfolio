@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio — Heitor Leonny
 
-## Getting Started
+Site pessoal em Next.js 16, React 19 e TypeScript. Inclui projetos filtráveis, trajetória profissional, competências e uma biblioteca pública de treinamentos com navegação por pastas.
 
-First, run the development server:
+## Executar localmente
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse http://localhost:3000. Para validar a aplicação:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Conteúdo do portfólio
 
-## Learn More
+- `src/lib/data.ts`: perfil, projetos, experiências, competências e certificação.
+- `src/app/page.tsx`: estrutura da página inicial.
+- `src/app/globals.css`: identidade visual e estilos responsivos.
+- `public/heitor.jpg`: fotografia de perfil.
+- `public/cv/Heitor-Leonny-CV.pdf`: currículo para download.
 
-To learn more about Next.js, take a look at the following resources:
+## Treinamentos e materiais
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+As páginas da biblioteca refletem as pastas e os arquivos de `public/treinamentos`. Para adicionar um material, coloque o arquivo na pasta desejada e gere uma nova versão com `npm run build`. As páginas das pastas são geradas no build; não há upload ou edição pelo navegador.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+public/treinamentos/
+└── csat/
+    └── materiais/
+        └── mare-de-volta.html
+```
 
-## Deploy on Vercel
+Rotas disponíveis:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `/treinamentos`: lista de treinamentos.
+- `/treinamentos/csat`: pasta do treinamento de CSAT.
+- `/treinamentos/csat/materiais`: lista de materiais, com busca local.
+- `/treinamentos/csat/materiais/mare-de-volta.html`: apresentação original.
+- `/treinamentos/csat/materiais/html`: atalho preservado para a apresentação.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+As variantes `/treinamentos/csat/material` e `/treinamentos/csat/material/html` redirecionam para as rotas equivalentes em `materiais`.
+
+A busca considera nome e descrição dos itens da pasta atual e ignora diferenças de acentuação. A navegação inclui breadcrumbs, retorno à pasta anterior e página 404 para caminhos inexistentes. Somente os arquivos públicos dessa árvore entram na listagem; arquivos ocultos e links simbólicos são ignorados.
+
+Os títulos e as descrições especiais podem ser ajustados em `src/lib/library.ts`. Pastas e arquivos novos recebem seus nomes como identificação padrão. Tudo em `public/treinamentos` é público; publique apenas materiais destinados aos visitantes do site.
+
+## Temas claro e escuro
+
+O botão de sol/lua no cabeçalho alterna o tema do portfólio e da biblioteca, inclusive no celular. A escolha é salva no navegador. Sem preferência salva, o site acompanha o tema do sistema. A apresentação HTML mantém sua identidade visual própria. As cores dos dois temas ficam centralizadas em `src/app/globals.css`.
